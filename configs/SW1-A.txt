@@ -1,0 +1,332 @@
+! Sanitized configuration export for SW1-A
+! Credentials and authentication material have been redacted.
+!
+version 15.0
+
+no service timestamps log datetime msec
+
+no service timestamps debug datetime msec
+
+no service password-encryption
+
+!
+
+hostname SW1-A
+
+!
+
+!
+
+!
+
+ip domain-name emmanuel.com
+
+!
+
+username admin secret <REDACTED>
+
+!
+
+ip arp inspection validate src-mac dst-mac ip
+
+!
+
+ip dhcp snooping vlan 10,20,50,99
+
+no ip dhcp snooping information option
+
+!
+
+spanning-tree mode rapid-pvst
+
+spanning-tree extend system-id
+
+!
+
+interface Port-channel1
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,50,99
+
+switchport mode trunk
+
+switchport nonegotiate
+
+!
+
+interface Port-channel3
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,30,40,50,99
+
+switchport mode trunk
+
+switchport nonegotiate
+
+!
+
+interface FastEthernet0/1
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,50,99
+
+ip arp inspection trust
+
+ip dhcp snooping trust
+
+switchport mode trunk
+
+switchport nonegotiate
+
+channel-group 1 mode active
+
+!
+
+interface FastEthernet0/2
+
+!
+
+interface FastEthernet0/3
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,50,99
+
+ip arp inspection trust
+
+ip dhcp snooping trust
+
+switchport mode trunk
+
+switchport nonegotiate
+
+channel-group 1 mode active
+
+!
+
+interface FastEthernet0/4
+
+switchport access vlan 10
+
+ip dhcp snooping limit rate 15
+
+switchport mode access
+
+switchport port-security
+
+switchport port-security mac-address sticky 
+
+switchport port-security violation restrict 
+
+switchport port-security mac-address sticky 0060.474B.52B9
+
+spanning-tree portfast
+
+spanning-tree bpduguard enable
+
+!
+
+interface FastEthernet0/5
+
+switchport access vlan 20
+
+ip dhcp snooping limit rate 15
+
+switchport mode access
+
+switchport port-security
+
+switchport port-security mac-address sticky 
+
+switchport port-security violation restrict 
+
+switchport port-security mac-address sticky 0060.47BC.3A07
+
+spanning-tree portfast
+
+spanning-tree bpduguard enable
+
+!
+
+interface FastEthernet0/6
+
+switchport access vlan 20
+
+ip arp inspection trust
+
+ip dhcp snooping limit rate 15
+
+switchport mode access
+
+switchport voice vlan 50
+
+spanning-tree portfast
+
+spanning-tree bpduguard enable
+
+!
+
+interface FastEthernet0/7
+
+!
+
+interface FastEthernet0/8
+
+!
+
+interface FastEthernet0/9
+
+!
+
+interface FastEthernet0/10
+
+!
+
+interface FastEthernet0/11
+
+!
+
+interface FastEthernet0/12
+
+!
+
+interface FastEthernet0/13
+
+!
+
+interface FastEthernet0/14
+
+!
+
+interface FastEthernet0/15
+
+!
+
+interface FastEthernet0/16
+
+!
+
+interface FastEthernet0/17
+
+!
+
+interface FastEthernet0/18
+
+!
+
+interface FastEthernet0/19
+
+!
+
+interface FastEthernet0/20
+
+!
+
+interface FastEthernet0/21
+
+!
+
+interface FastEthernet0/22
+
+!
+
+interface FastEthernet0/23
+
+!
+
+interface FastEthernet0/24
+
+!
+
+interface GigabitEthernet0/1
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,30,40,50,99
+
+switchport mode trunk
+
+switchport nonegotiate
+
+channel-group 3 mode active
+
+!
+
+interface GigabitEthernet0/2
+
+switchport trunk native vlan 1000
+
+switchport trunk allowed vlan 10,20,30,40,50,99
+
+switchport mode trunk
+
+switchport nonegotiate
+
+channel-group 3 mode active
+
+!
+
+interface Vlan1
+
+no ip address
+
+shutdown
+
+!
+
+interface Vlan99
+
+ip address 10.10.99.11 255.255.255.0
+
+!
+
+ip default-gateway 10.10.99.1
+
+!
+
+!
+
+!
+
+!
+
+ip access-list standard SSH_ONLY_IT
+
+permit 10.10.10.0 0.0.0.255
+
+deny any
+
+line con 0
+
+!
+
+line vty 0 4
+
+access-class SSH_ONLY_IT in
+
+login local
+
+transport input ssh
+
+line vty 5 15
+
+login
+
+!
+
+!
+
+!
+
+ntp authenticate
+
+ntp trusted-key 1
+
+ntp server 10.10.254.1 key 1
+
+!
+
+end
